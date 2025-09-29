@@ -3,6 +3,10 @@ const sequelize = require("../config/db");
 const User = require("./User");
 
 const Store = sequelize.define("Store", {
+  id: { type: DataTypes.INTEGER, 
+    primaryKey: true, 
+    autoIncrement: true 
+  },
   name: {
     type: DataTypes.STRING(60),
     allowNull: false,
@@ -14,12 +18,16 @@ const Store = sequelize.define("Store", {
     validate: { isEmail: true },
   },
   address: {
-    type: DataTypes.STRING(200),
+    type: DataTypes.STRING(400),
     allowNull: false,
   },
-});
+  owner_id: { 
+    type: DataTypes.INTEGER, 
+    allowNull: false 
+  },
+}, {
+    timestamps: false
+  });
 
-User.hasMany(Store, { foreignKey: "owner_id" });
-Store.belongsTo(User, { foreignKey: "owner_id" });
 
 module.exports = Store;
