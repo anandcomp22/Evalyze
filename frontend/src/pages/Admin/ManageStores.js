@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { getStores, addStore, deleteStore } from "../../api/admin";
 import { Button, Table, TableBody, TableCell, TableHead, TableRow, Typography, TextField, Box } from "@mui/material";
 
-const ManageStores = ({ token }) => {
+const ManageStores = () => {
   const [stores, setStores] = useState([]);
   const [storeName, setStoreName] = useState("");
+  const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
+  const token = localStorage.getItem("token");
 
   const fetchStores = async () => {
     try {
-      const token = localStorage.getItem("token");
       const res = await getStores(token);
       setStores(res.data.stores);
     } catch (err) {
@@ -43,7 +44,7 @@ const ManageStores = ({ token }) => {
     try {
       await deleteStore(storeId, token);
       alert("Store deleted successfully");
-      fetchStores(); // refresh the list
+      fetchStores();
     } catch (err) {
       console.error(err);
       alert("Failed to delete store");
@@ -62,6 +63,11 @@ const ManageStores = ({ token }) => {
           label="Store Name"
           value={storeName}
           onChange={(e) => setStoreName(e.target.value)}
+        />
+        <TextField
+          label="Store Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
           label="Address"
