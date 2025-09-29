@@ -6,7 +6,8 @@ const ManageUsers = ({ token }) => {
   const [users, setUsers] = useState([]);
   
   const fetchUsers = async () => {
-    try {
+    try {     
+      const token = localStorage.getItem("token");
       const res = await getUsers(token);
       setUsers(res.data.users);
     } catch (err) {

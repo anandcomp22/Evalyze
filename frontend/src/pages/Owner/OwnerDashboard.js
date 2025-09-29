@@ -11,13 +11,9 @@ const OwnerDashboard = ({ onLogout }) => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
-
-  useEffect(() => {
-    fetchDashboard();
-  }, []);
-
   const fetchDashboard = async () => {
     try {
+      const token = localStorage.getItem("token");
       const res = await getOwnerDashboard(token);
       setStoreData(res.data);
     } catch (err) {
@@ -25,6 +21,10 @@ const OwnerDashboard = ({ onLogout }) => {
       alert("Failed to fetch dashboard data");
     }
   };
+
+  useEffect(() => {
+    fetchDashboard();
+  }, []);
 
   const handlePasswordUpdate = async () => {
     if (!currentPassword || !newPassword) {

@@ -7,12 +7,9 @@ const AdminDashboard = ({ token }) => {
   const [stats, setStats] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchStats();
-  }, []);
-
   const fetchStats = async () => {
     try {
+      const token = localStorage.getItem("token");
       const res = await getDashboardStats(token);
       setStats(res.data);
     } catch (err) {
@@ -20,6 +17,10 @@ const AdminDashboard = ({ token }) => {
       alert("Failed to fetch dashboard stats");
     }
   };
+
+  useEffect(() => {
+    fetchStats();
+  }, []);
 
   return (
     <Container sx={{ mt: 4 }}>

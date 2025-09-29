@@ -9,6 +9,7 @@ const ManageStores = ({ token }) => {
 
   const fetchStores = async () => {
     try {
+      const token = localStorage.getItem("token");
       const res = await getStores(token);
       setStores(res.data.stores);
     } catch (err) {
