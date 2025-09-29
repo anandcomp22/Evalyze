@@ -61,12 +61,12 @@ const ManageUsers = ({ token }) => {
   };
 
   const filteredUsers = users.filter((u) => {
-    return (
-      u.name.toLowerCase().includes(search.name.toLowerCase()) &&
-      u.email.toLowerCase().includes(search.email.toLowerCase()) &&
-      (search.role === "" || u.role === search.role)
-    );
-  });
+  return (
+    (u.name?.toLowerCase() || "").includes(search.name?.toLowerCase() || "") &&
+    (u.email?.toLowerCase() || "").includes(search.email?.toLowerCase() || "") &&
+    (search.role === "" || u.role === search.role)
+  );
+});
 
   const handleViewDetails = async (userId) => {
   try {

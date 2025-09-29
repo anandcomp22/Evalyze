@@ -79,12 +79,12 @@ const ManageStores = () => {
     }
   };
 
-  const filteredStores = stores.filter((s) => {
-    return (
-      s.storeName.toLowerCase().includes(search.name.toLowerCase()) &&
-      (s.email || "").toLowerCase().includes(search.email.toLowerCase())
-    );
-  });
+  const filteredStores = stores.filter((store) => {
+  return (
+    (store.storeName?.toLowerCase() || "").includes(search.name?.toLowerCase() || "") &&
+    (store.email?.toLowerCase() || "").includes(search.email?.toLowerCase() || "")
+  );
+});
 
   return (
     <div>
